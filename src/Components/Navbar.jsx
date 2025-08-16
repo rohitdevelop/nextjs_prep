@@ -10,8 +10,8 @@ function Navbar() {
       <ul className="flex gap-6">
         <Link href={"/"}> <li className="hover:text-gray-400 cursor-pointer">Home</li> </Link>
         <Link  href={"/about"}><li className="hover:text-gray-400 cursor-pointer">About</li> </Link>
-        <Link href={"/Contact"}> <li className="hover:text-gray-400 cursor-pointer">Contact</li> </Link>
-        <Link href={"/project"}> <li className="hover:text-gray-400 cursor-pointer">Project</li> </Link>
+        <Link href={"/contact"}> <li className="hover:text-gray-400 cursor-pointer">Contact</li> </Link>
+        <Link href={"/product"}> <li className="hover:text-gray-400 cursor-pointer">Product</li> </Link>
       </ul>
     </div>
   );
