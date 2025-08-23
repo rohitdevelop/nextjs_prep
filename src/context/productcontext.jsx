@@ -1,27 +1,23 @@
+// WishlistContext.js
 "use client";
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 
-export const ProductContext = createContext();
+export const WishlistContext = createContext();
 
-export const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
+export const WishlistProvider = ({ children }) => {
+  const [wishlist, setWishlist] = useState([]);
 
-  // Load products from localStorage on first render
-  useEffect(() => {
-    const storedProducts = localStorage.getItem("products");
-    if (storedProducts) {
-      setProducts(JSON.parse(storedProducts));
-    }
-  }, []);
+  const addProduct = (product) => {
+    setWishlist([...wishlist, product]);
+  };
 
-  // Save products to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem("products", JSON.stringify(products));
-  }, [products]);
+  const removeProduct = (index) => {
+    setWishlist(wishlist.filter((_, i) => i !== index));
+  };
 
   return (
-    <ProductContext.Provider value={{ products, setProducts }}>
+    <WishlistContext.Provider value={{ wishlist, addProduct, removeProduct }}>
       {children}
-    </ProductContext.Provider>
+    </WishlistContext.Provider>
   );
 };

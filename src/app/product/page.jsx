@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { ProductContext } from "@/context/ProductContext";
 
 const ProductPage = () => {
-  const { products } = useContext(ProductContext);
+  const { products, removeProduct } = useContext(ProductContext);
 
   return (
     <div className="bg-red-700 min-h-screen mt-24 p-6">
@@ -30,6 +30,14 @@ const ProductPage = () => {
                 <p className="text-gray-600">{product.description}</p>
                 <p className="text-yellow-600 mt-2">⭐ {product.rating}/5</p>
               </div>
+              <div>
+                {products.map((item, index) => (
+                  <div key={index}>
+                    <h2>{item.name}</h2>
+                    <button onClick={() => removeProduct(index)}>Remove</button>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -39,4 +47,3 @@ const ProductPage = () => {
 };
 
 export default ProductPage;
- 
