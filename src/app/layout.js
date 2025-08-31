@@ -1,7 +1,7 @@
 import "./globals.css";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
-import { ProductProvider } from "@/context/ProductContext";
+// import { ProductProvider } from "@/context/ProductContext";
  
 export const metadata = {
   title: "practice for interview",
@@ -15,10 +15,10 @@ export default function RootLayout({ children }) {
         <Navbar />
         
         {/* ✅ Wrap with both contexts */}
-        <ProductProvider>
+        {/* <ProductProvider> */}
              {children}
-         </ProductProvider>
-        
+         {/* </ProductProvider> */}
+ 
         <Footer />
       </body>
     </html>
