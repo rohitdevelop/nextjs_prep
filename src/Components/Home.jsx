@@ -27,7 +27,7 @@ export default function Home() {
           className="bg-black text-white"
           type="text"
         />
-        <button onClick={addclick} className="py-2 px-2 bg-amber-400">
+        <button onClick={addclick} className=" bg-amber-400">
           add
         </button>
       </div>
