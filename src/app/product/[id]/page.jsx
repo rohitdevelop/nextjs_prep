@@ -16,7 +16,7 @@ const ProductDetailPage = ({ params }) => {
   const product = productDetails[id] || { name: "Product", description: "Product not found", price: "N/A", features: [] };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-black to-black py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
         <Link 

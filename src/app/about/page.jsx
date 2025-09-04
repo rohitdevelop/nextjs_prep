@@ -25,7 +25,7 @@ const TitleUpdater = () => {
   );
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-900 text-white p-10">
+    <div className="flex flex-col items-center min-h-screen bg-gradient-to-br from-purple-900 via-black to-black text-white p-10">
       <h1 className="text-3xl font-bold mb-6">Search Images</h1>
 
       {/* Search Box */}
