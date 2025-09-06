@@ -1,1 +1,7 @@
 <!-- now next in that add deta base and make products delete update or add in next backend write it down! -->
+
+
+<!-- rohitdev124421_db_user -->
+<!-- qoXinodjd9mco7qC -->
+
+<!-- mongodb+srv://rohitdev124421_db_user:qoXinodjd9mco7qC@nextbakend.sk7xh9o.mongodb.net/ -->

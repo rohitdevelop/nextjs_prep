@@ -12,6 +12,7 @@ function Navbar() {
         <Link  href={"/about"}><li className="hover:text-gray-400 cursor-pointer">Images</li> </Link>
         <Link href={"/contact"}> <li className="hover:text-gray-400 cursor-pointer">Counter</li> </Link>
         <Link href={"/product"}> <li className="hover:text-gray-400 cursor-pointer">Productes</li> </Link>
+        <Link href={"/admin"}> <li className="hover:text-gray-400 cursor-pointer">Admin</li> </Link>
       </ul>
     </div>
   );
