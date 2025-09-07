@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image"; // ✅ Correct import
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -24,12 +25,22 @@ const ProductsPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((item) => (
             <Link
-              key={item.id}
-              href={`/product/${item.id}`}
+              key={item._id} // ✅ Use MongoDB _id
+              href={`/product/${item._id}`}
               className="group"
             >
               <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border hover:border-blue-300 group-hover:-translate-y-1">
                 <div className="text-center">
+                  {item.image && item.image.trim() !== "" && (
+                    <Image
+                      src={item.image}
+                      alt={item.name || "Product image"}
+                      width={200}
+                      height={200}
+                      className="mt-4 w-32 h-32 object-cover rounded mx-auto"
+                    />
+                  )}
+
                   <h2 className="text-xl font-semibold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors">
                     {item.name}
                   </h2>

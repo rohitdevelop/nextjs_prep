@@ -1,12 +1,13 @@
 "use client";
+import {Image } from "next/image";
 import { useEffect, useState } from "react";
 
 export default function AdminPage() {
-  const [form, setForm] = useState({ name: "", info: "", price: "" });
+  const [form, setForm] = useState({ name: "", info: "", price: "", image: "" });
   const [products, setProducts] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
 
-  // Fetch products from backend
+  // Fetch products
   const fetchProducts = async () => {
     const res = await fetch("/api/products");
     const data = await res.json();
@@ -17,12 +18,29 @@ export default function AdminPage() {
     fetchProducts();
   }, []);
 
-  // Handle form changes
+  // Handle text input
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Add new product
+  // Handle image upload
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const data = new FormData();
+    data.append("file", file);
+
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: data,
+    });
+
+    const result = await res.json();
+    setForm({ ...form, image: result.url }); // Save image URL
+  };
+
+  // Add product
   const handleSubmit = async (e) => {
     e.preventDefault();
     await fetch("/api/products", {
@@ -30,7 +48,7 @@ export default function AdminPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
-    setForm({ name: "", info: "", price: "" });
+    setForm({ name: "", info: "", price: "", image: "" });
     fetchProducts();
   };
 
@@ -40,10 +58,15 @@ export default function AdminPage() {
     fetchProducts();
   };
 
-  // Start editing a product
+  // Start editing
   const handleEdit = (product) => {
     setEditingProduct(product._id);
-    setForm({ name: product.name, info: product.info, price: product.price });
+    setForm({
+      name: product.name,
+      info: product.info,
+      price: product.price,
+      image: product.image || "",
+    });
   };
 
   // Update product
@@ -55,7 +78,7 @@ export default function AdminPage() {
       body: JSON.stringify(form),
     });
     setEditingProduct(null);
-    setForm({ name: "", info: "", price: "" });
+    setForm({ name: "", info: "", price: "", image: "" });
     fetchProducts();
   };
 
@@ -108,6 +131,20 @@ export default function AdminPage() {
             className="w-full p-2 rounded bg-gray-700 text-white"
             required
           />
+
+          {/* Image Upload */}
+          <input type="file" accept="image/*" onChange={handleImageUpload} />
+          {form.image && (
+            <Image
+              src={form.image}
+              alt="preview"
+              height={500}
+              wieght={500}
+              className="mt-4 w-32 h-32 object-cover rounded"
+              >
+              </Image>
+          )}
+
           <button
             type="submit"
             className="w-full bg-blue-600 py-2 rounded hover:bg-blue-700"
@@ -123,6 +160,16 @@ export default function AdminPage() {
               key={item._id}
               className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-all"
             >
+              {item.image && (
+              <Image
+              src={form.image}
+              alt="preview"
+              height={500}
+              wieght={500}
+              className="mt-4 w-32 h-32 object-cover rounded"
+              >
+              </Image>
+              )}
               <h3 className="text-xl font-semibold">{item.name}</h3>
               <p className="text-gray-400">{item.info}</p>
               <p className="text-lg font-bold text-blue-400">${item.price}</p>
