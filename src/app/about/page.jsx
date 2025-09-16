@@ -1,11 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import Image from "next/image";
 
 const TitleUpdater = () => {
   const [search, setSearch] = useState("");
+ let ref = useRef(0);
 
+  function handleClick() {
+ ref.current = ref.current + 1;
+ alert("click is "+ ref.current)
+  }
   let cards = [
     { id: 1, name: "Mountain Landscape", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" },
     { id: 2, name: "Ocean Sunset", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop" },
@@ -26,6 +31,9 @@ const TitleUpdater = () => {
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-gradient-to-br from-purple-900 via-black to-black text-white p-10">
+       <button onClick={handleClick}>
+      Click me!
+    </button>
       <h1 className="text-3xl font-bold mb-6">Search Images</h1>
 
       {/* Search Box */}
